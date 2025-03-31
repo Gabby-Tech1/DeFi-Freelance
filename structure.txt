@@ -1,0 +1,880 @@
+.:
+total 212
+drwx------ 18 stephen stephen   4096 Mar 27 15:57 .
+drwxr-x--- 11 stephen stephen   4096 Mar 20 07:48 ..
+drwxrwxrwx  4 stephen stephen   4096 Mar 20 07:52 .dfx
+drwxrwxrwx  6 stephen stephen   4096 Mar 20 07:23 .next
+-rwxrwxrwx  1 stephen stephen   1486 Mar 20 15:20 README.md
+drwxr-xr-x 17 stephen stephen   4096 Mar 27 15:49 app
+drwxr-xr-x  3 stephen stephen   4096 Mar 20 08:02 canisters
+drwxr-xr-x  7 stephen stephen   4096 Mar 20 15:20 components
+drwxrwxrwx  2 stephen stephen   4096 Mar 19 16:02 contexts
+drwxr-xr-x  2 stephen stephen   4096 Mar 20 15:20 contracts
+drwxr-xr-x  3 stephen stephen   4096 Mar 20 15:20 declarations
+-rwxrwxrwx  1 stephen stephen    335 Mar 20 15:20 dfx.json
+drwxr-xr-x  2 stephen stephen   4096 Mar 20 15:20 hooks
+-rwxrwxrwx  1 stephen stephen    216 Mar 20 15:20 next-env.d.ts
+-rwxrwxrwx  1 stephen stephen    888 Mar 20 15:20 next.config.js
+-rwxrwxrwx  1 stephen stephen    140 Mar 20 15:20 next.config.ts
+-rwxrwxrwx  1 stephen stephen 113187 Mar 20 07:30 package-lock.json
+-rwxrwxrwx  1 stephen stephen   1203 Mar 19 16:11 package.json
+-rwxrwxrwx  1 stephen stephen     86 Mar 19 16:02 postcss.config.mjs
+drwxrwxrwx  2 stephen stephen   4096 Mar 19 16:02 providers
+drwxrwxrwx  2 stephen stephen   4096 Mar 19 16:02 services
+drwxr-xr-x  4 stephen stephen   4096 Mar 27 15:48 src
+-rw-r--r--  1 stephen stephen      0 Mar 27 15:57 structure.txt
+drwxrwxrwx  2 stephen stephen   4096 Mar 19 16:02 styles
+-rwxrwxrwx  1 stephen stephen    723 Mar 19 16:02 tsconfig.json
+drwxrwxrwx  2 stephen stephen   4096 Mar 19 16:02 types
+drwxrwxrwx  2 stephen stephen   4096 Mar 19 16:02 utils
+
+./.dfx:
+total 16
+drwxrwxrwx  4 stephen stephen 4096 Mar 20 07:52 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+drwxr-xr-x  4 stephen stephen 4096 Mar 20 14:08 local
+drwxrwxrwx  3 stephen stephen 4096 Mar 20 07:52 network
+
+./.dfx/local:
+total 24
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 14:08 .
+drwxrwxrwx 4 stephen stephen 4096 Mar 20 07:52 ..
+-rw-r--r-- 1 stephen stephen  134 Mar 20 14:10 canister_ids.json
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 07:58 canisters
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 14:08 lsp
+-rw-r--r-- 1 stephen stephen   93 Mar 20 07:53 wallets.json
+
+./.dfx/local/canisters:
+total 16
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 07:58 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 14:08 ..
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 14:24 freelance
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:43 idl
+
+./.dfx/local/canisters/freelance:
+total 300
+drwxr-xr-x 2 stephen stephen   4096 Mar 20 14:24 .
+drwxr-xr-x 4 stephen stephen   4096 Mar 20 07:58 ..
+-rw-r--r-- 1 stephen stephen   2518 Mar 27 15:43 constructor.did
+-rw-r--r-- 1 stephen stephen   2518 Mar 27 15:34 constructor.old.did
+-rw-r--r-- 1 stephen stephen   2518 Mar 27 15:43 freelance.did
+-rw-r--r-- 1 stephen stephen    171 Mar 27 15:43 freelance.most
+-rw-r--r-- 1 stephen stephen    211 Mar 27 15:34 freelance.old.most
+-rw-r--r-- 1 stephen stephen 255315 Mar 27 15:43 freelance.wasm
+-rw-r--r-- 1 stephen stephen   1973 Mar 27 15:43 index.js
+-rw-r--r-- 1 stephen stephen      2 Mar 27 15:43 init_args.txt
+-rw-r--r-- 1 stephen stephen   2518 Mar 27 15:43 service.did
+-rw-r--r-- 1 stephen stephen   3223 Mar 27 15:43 service.did.d.ts
+-rw-r--r-- 1 stephen stephen   3613 Mar 27 15:43 service.did.js
+
+./.dfx/local/canisters/idl:
+total 8
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:43 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 07:58 ..
+
+./.dfx/local/lsp:
+total 12
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 14:08 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 14:08 ..
+-rw-r--r-- 1 stephen stephen 2518 Mar 27 15:43 bkyz2-fmaaa-aaaaa-qaaaq-cai.did
+
+./.dfx/network:
+total 12
+drwxrwxrwx 3 stephen stephen 4096 Mar 20 07:52 .
+drwxrwxrwx 4 stephen stephen 4096 Mar 20 07:52 ..
+drwxr-xr-x 4 stephen stephen 4096 Mar 27 15:33 local
+
+./.dfx/network/local:
+total 52
+drwxr-xr-x 4 stephen stephen 4096 Mar 27 15:33 .
+drwxrwxrwx 3 stephen stephen 4096 Mar 20 07:52 ..
+-rw-r--r-- 1 stephen stephen    0 Mar 27 15:33 ic-btc-adapter-config.json
+-rw-r--r-- 1 stephen stephen    0 Mar 27 15:33 ic-btc-adapter-pid
+-rw-r--r-- 1 stephen stephen  138 Mar 27 15:33 ic-canister-http-config.json
+-rw-r--r-- 1 stephen stephen   53 Mar 20 07:52 ic-canister-http-socket-path
+-rw-r--r-- 1 stephen stephen    4 Mar 27 15:33 ic-https-outcalls-adapter-pid
+-rw-r--r-- 1 stephen stephen  147 Mar 20 07:52 network-id
+-rw-r--r-- 1 stephen stephen    4 Mar 27 15:33 pid
+-rw-r--r-- 1 stephen stephen    0 Mar 27 15:33 pocket-ic-port
+-rw-r--r-- 1 stephen stephen    4 Mar 27 15:33 pocket-ic-proxy-pid
+-rw-r--r-- 1 stephen stephen    6 Mar 27 15:33 pocket-ic-proxy-port
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:33 replica-configuration
+-rw-r--r-- 1 stephen stephen  965 Mar 27 15:33 replica-effective-config.json
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 state
+-rw-r--r-- 1 stephen stephen    4 Mar 27 15:33 webserver-port
+
+./.dfx/network/local/replica-configuration:
+total 16
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:33 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 27 15:33 ..
+-rw------- 1 stephen stephen    5 Mar 27 15:33 replica-1.port
+-rw-r--r-- 1 stephen stephen    4 Mar 27 15:33 replica-pid
+
+./.dfx/network/local/state:
+total 12
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 27 15:33 ..
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 07:52 replicated_state
+
+./.dfx/network/local/state/replicated_state:
+total 40
+drwxr-xr-x 4 stephen stephen  4096 Mar 20 07:52 .
+drwxr-xr-x 3 stephen stephen  4096 Mar 20 07:52 ..
+-rw-r--r-- 1 stephen stephen  5438 Mar 27 15:33 ic.json5
+drwxr-xr-x 3 stephen stephen  4096 Mar 20 07:52 ic_registry_local_store
+-rw-r--r-- 1 stephen stephen   240 Mar 20 07:52 nns_public_key.pem
+drwxr-xr-x 5 stephen stephen  4096 Mar 20 07:52 node-100
+-rw-r--r-- 1 stephen stephen 11188 Mar 20 07:52 registry.proto
+
+./.dfx/network/local/state/replicated_state/ic_registry_local_store:
+total 12
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 07:52 ..
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 0000000000
+
+./.dfx/network/local/state/replicated_state/ic_registry_local_store/0000000000:
+total 12
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 ..
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 00
+
+./.dfx/network/local/state/replicated_state/ic_registry_local_store/0000000000/00:
+total 12
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 07:52 ..
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 07:52 00
+
+./.dfx/network/local/state/replicated_state/ic_registry_local_store/0000000000/00/00:
+total 20
+drwxr-xr-x 2 stephen stephen  4096 Mar 20 07:52 .
+drwxr-xr-x 3 stephen stephen  4096 Mar 20 07:52 ..
+-rw-r--r-- 1 stephen stephen 11144 Mar 20 07:52 01.pb
+
+./.dfx/network/local/state/replicated_state/node-100:
+total 44
+drwxr-xr-x  5 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x  4 stephen stephen 4096 Mar 20 07:52 ..
+-rw-r--r--  1 stephen stephen  152 Mar 20 07:52 committee_signing_key
+drwxr-x---  2 stephen stephen 4096 Mar 27 15:52 crypto
+-rw-r--r--  1 stephen stephen   63 Mar 20 07:52 derived_node_id
+drwxr-xr-x  5 stephen stephen 4096 Mar 20 07:52 ic_consensus_pool
+-rw-r--r--  1 stephen stephen   37 Mar 20 07:52 idkg_mega_encryption_key
+-rw-r--r--  1 stephen stephen  231 Mar 20 07:52 ni_dkg_dealing_encryption_key
+-rw-r--r--  1 stephen stephen   36 Mar 20 07:52 node_signing_key
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 state
+-rw-r--r--  1 stephen stephen  348 Mar 20 07:52 transport_tls_certificate
+
+./.dfx/network/local/state/replicated_state/node-100/crypto:
+total 860
+drwxr-x--- 2 stephen stephen   4096 Mar 27 15:52 .
+drwxr-xr-x 5 stephen stephen   4096 Mar 20 07:52 ..
+-rw-r--r-- 1 stephen stephen    670 Mar 20 07:53 canister_sks_data.pb
+-rw-r--r-- 1 stephen stephen    828 Mar 20 07:52 public_keys.pb
+-rw-r--r-- 1 stephen stephen 862187 Mar 27 15:51 sks_data.pb
+
+./.dfx/network/local/state/replicated_state/node-100/ic_consensus_pool:
+total 24
+drwxr-xr-x 5 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 5 stephen stephen 4096 Mar 20 07:52 ..
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 07:52 certification
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 07:52 consensus
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 07:52 idkg
+-rw-r--r-- 1 stephen stephen    5 Mar 20 07:52 replica_version
+
+./.dfx/network/local/state/replicated_state/node-100/ic_consensus_pool/certification:
+total 500
+drwxr-xr-x 2 stephen stephen   4096 Mar 20 07:52 .
+drwxr-xr-x 5 stephen stephen   4096 Mar 20 07:52 ..
+-rw-r--r-- 1 stephen stephen 495616 Mar 27 15:57 data.mdb
+-rw-r--r-- 1 stephen stephen 131200 Mar 27 15:57 lock.mdb
+
+./.dfx/network/local/state/replicated_state/node-100/ic_consensus_pool/consensus:
+total 7728
+drwxr-xr-x 2 stephen stephen    4096 Mar 20 07:52 .
+drwxr-xr-x 5 stephen stephen    4096 Mar 20 07:52 ..
+-rw-r--r-- 1 stephen stephen 7897088 Mar 27 15:57 data.mdb
+-rw-r--r-- 1 stephen stephen  131200 Mar 27 15:57 lock.mdb
+
+./.dfx/network/local/state/replicated_state/node-100/ic_consensus_pool/idkg:
+total 68
+drwxr-xr-x 2 stephen stephen   4096 Mar 20 07:52 .
+drwxr-xr-x 5 stephen stephen   4096 Mar 20 07:52 ..
+-rw-r--r-- 1 stephen stephen  57344 Mar 20 07:52 data.mdb
+-rw-r--r-- 1 stephen stephen 131200 Mar 27 15:57 lock.mdb
+
+./.dfx/network/local/state/replicated_state/node-100/state:
+total 44
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 .
+drwxr-xr-x  5 stephen stephen 4096 Mar 20 07:52 ..
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 07:52 backups
+drwxr-xr-x  3 stephen stephen 4096 Mar 27 15:51 checkpoints
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 07:52 diverged_checkpoints
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 07:52 diverged_state_markers
+drwxr-xr-x  2 stephen stephen 4096 Mar 27 15:51 fs_tmp
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 07:52 page_deltas
+-rw-r--r--  1 stephen stephen 1872 Mar 27 15:51 states_metadata.pbuf
+drwxr-xr-x  3 stephen stephen 4096 Mar 27 15:51 tip
+drwxr-xr-x  2 stephen stephen 4096 Mar 27 15:51 tmp
+
+./.dfx/network/local/state/replicated_state/node-100/state/backups:
+total 8
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 ..
+
+./.dfx/network/local/state/replicated_state/node-100/state/checkpoints:
+total 12
+drwxr-xr-x  3 stephen stephen 4096 Mar 27 15:51 .
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 ..
+drwxr-xr-x  3 stephen stephen 4096 Mar 27 15:51 0000000000008e94
+
+./.dfx/network/local/state/replicated_state/node-100/state/checkpoints/0000000000008e94:
+total 20
+drwxr-xr-x 3 stephen stephen 4096 Mar 27 15:51 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 27 15:51 ..
+drwxr-xr-x 5 stephen stephen 4096 Mar 27 15:45 canister_states
+-r--r--r-- 1 stephen stephen   72 Mar 27 15:51 stats.pbuf
+-r--r--r-- 1 stephen stephen 1086 Mar 27 15:51 system_metadata.pbuf
+
+./.dfx/network/local/state/replicated_state/node-100/state/checkpoints/0000000000008e94/canister_states:
+total 20
+drwxr-xr-x 5 stephen stephen 4096 Mar 27 15:45 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 27 15:51 ..
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:51 80000000001000000101
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:51 80000000001000010101
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:51 80000000001000020101
+
+./.dfx/network/local/state/replicated_state/node-100/state/checkpoints/0000000000008e94/canister_states/80000000001000000101:
+total 5224
+drwxr-xr-x 2 stephen stephen    4096 Mar 27 15:51 .
+drwxr-xr-x 5 stephen stephen    4096 Mar 27 15:45 ..
+-r--r--r-- 2 stephen stephen 3969108 Mar 20 07:58 00000000000001c2_0000_vmemory_0.overlay
+-r--r--r-- 1 stephen stephen    1293 Mar 27 15:51 canister.pbuf
+-r--r--r-- 2 stephen stephen 1361197 Mar 20 07:58 software.wasm
+
+./.dfx/network/local/state/replicated_state/node-100/state/checkpoints/0000000000008e94/canister_states/80000000001000010101:
+total 340
+drwxr-xr-x 2 stephen stephen   4096 Mar 27 15:51 .
+drwxr-xr-x 5 stephen stephen   4096 Mar 27 15:45 ..
+-r--r--r-- 2 stephen stephen   4132 Mar 27 15:38 0000000000008a7a_0000_stable_memory.overlay
+-r--r--r-- 2 stephen stephen  61476 Mar 27 15:38 0000000000008a7a_0000_vmemory_0.overlay
+-r--r--r-- 1 stephen stephen   4298 Mar 27 15:51 canister.pbuf
+-r--r--r-- 2 stephen stephen 255315 Mar 27 15:39 software.wasm
+
+./.dfx/network/local/state/replicated_state/node-100/state/checkpoints/0000000000008e94/canister_states/80000000001000020101:
+total 2172
+drwxr-xr-x 2 stephen stephen    4096 Mar 27 15:51 .
+drwxr-xr-x 5 stephen stephen    4096 Mar 27 15:45 ..
+-r--r--r-- 2 stephen stephen  503892 Mar 20 14:15 0000000000006176_0000_vmemory_0.overlay
+-r--r--r-- 1 stephen stephen     971 Mar 27 15:51 canister.pbuf
+-r--r--r-- 2 stephen stephen 1701598 Mar 20 14:16 software.wasm
+
+./.dfx/network/local/state/replicated_state/node-100/state/diverged_checkpoints:
+total 8
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 ..
+
+./.dfx/network/local/state/replicated_state/node-100/state/diverged_state_markers:
+total 8
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 ..
+
+./.dfx/network/local/state/replicated_state/node-100/state/fs_tmp:
+total 8
+drwxr-xr-x  2 stephen stephen 4096 Mar 27 15:51 .
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 ..
+
+./.dfx/network/local/state/replicated_state/node-100/state/page_deltas:
+total 8
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 07:52 .
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 ..
+
+./.dfx/network/local/state/replicated_state/node-100/state/tip:
+total 12
+drwxr-xr-x  3 stephen stephen 4096 Mar 27 15:51 .
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 ..
+drwxr-xr-x  5 stephen stephen 4096 Mar 27 15:51 canister_states
+
+./.dfx/network/local/state/replicated_state/node-100/state/tip/canister_states:
+total 20
+drwxr-xr-x 5 stephen stephen 4096 Mar 27 15:51 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 27 15:51 ..
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:51 80000000001000000101
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:51 80000000001000010101
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:51 80000000001000020101
+
+./.dfx/network/local/state/replicated_state/node-100/state/tip/canister_states/80000000001000000101:
+total 5220
+drwxr-xr-x 2 stephen stephen    4096 Mar 27 15:51 .
+drwxr-xr-x 5 stephen stephen    4096 Mar 27 15:51 ..
+-r--r--r-- 2 stephen stephen 3969108 Mar 20 07:58 00000000000001c2_0000_vmemory_0.overlay
+-r--r--r-- 2 stephen stephen 1361197 Mar 20 07:58 software.wasm
+
+./.dfx/network/local/state/replicated_state/node-100/state/tip/canister_states/80000000001000010101:
+total 332
+drwxr-xr-x 2 stephen stephen   4096 Mar 27 15:51 .
+drwxr-xr-x 5 stephen stephen   4096 Mar 27 15:51 ..
+-r--r--r-- 2 stephen stephen   4132 Mar 27 15:38 0000000000008a7a_0000_stable_memory.overlay
+-r--r--r-- 2 stephen stephen  61476 Mar 27 15:38 0000000000008a7a_0000_vmemory_0.overlay
+-r--r--r-- 2 stephen stephen 255315 Mar 27 15:39 software.wasm
+
+./.dfx/network/local/state/replicated_state/node-100/state/tip/canister_states/80000000001000020101:
+total 2168
+drwxr-xr-x 2 stephen stephen    4096 Mar 27 15:51 .
+drwxr-xr-x 5 stephen stephen    4096 Mar 27 15:51 ..
+-r--r--r-- 2 stephen stephen  503892 Mar 20 14:15 0000000000006176_0000_vmemory_0.overlay
+-r--r--r-- 2 stephen stephen 1701598 Mar 20 14:16 software.wasm
+
+./.dfx/network/local/state/replicated_state/node-100/state/tmp:
+total 8
+drwxr-xr-x  2 stephen stephen 4096 Mar 27 15:51 .
+drwxr-xr-x 10 stephen stephen 4096 Mar 27 15:51 ..
+
+./.next:
+total 284
+drwxrwxrwx  6 stephen stephen   4096 Mar 20 07:23 .
+drwx------ 18 stephen stephen   4096 Mar 27 15:57 ..
+-rwxrwxrwx  1 stephen stephen    455 Mar 20 07:03 app-build-manifest.json
+-rwxrwxrwx  1 stephen stephen    388 Mar 20 07:03 build-manifest.json
+drwxrwxrwx  4 stephen stephen   4096 Mar 19 16:15 cache
+-rwxrwxrwx  1 stephen stephen     20 Mar 20 07:03 package.json
+-rwxrwxrwx  1 stephen stephen    695 Mar 20 07:03 react-loadable-manifest.json
+drwxrwxrwx  4 stephen stephen   4096 Mar 20 07:03 server
+drwxrwxrwx  7 stephen stephen   4096 Mar 20 07:03 static
+-rwxrwxrwx  1 stephen stephen 249812 Mar 20 07:23 trace
+drwxrwxrwx  3 stephen stephen   4096 Mar 20 07:03 types
+
+./.next/cache:
+total 20
+drwxrwxrwx 4 stephen stephen 4096 Mar 19 16:15 .
+drwxrwxrwx 6 stephen stephen 4096 Mar 20 07:23 ..
+-rwxrwxrwx 1 stephen stephen  102 Mar 19 16:13 .rscinfo
+drwxrwxrwx 3 stephen stephen 4096 Mar 19 16:15 swc
+drwxrwxrwx 4 stephen stephen 4096 Mar 19 16:15 webpack
+
+./.next/cache/swc:
+total 12
+drwxrwxrwx 3 stephen stephen 4096 Mar 19 16:15 .
+drwxrwxrwx 4 stephen stephen 4096 Mar 19 16:15 ..
+drwxrwxrwx 3 stephen stephen 4096 Mar 19 16:15 plugins
+
+./.next/cache/swc/plugins:
+total 12
+drwxrwxrwx 3 stephen stephen 4096 Mar 19 16:15 .
+drwxrwxrwx 3 stephen stephen 4096 Mar 19 16:15 ..
+drwxrwxrwx 2 stephen stephen 4096 Mar 19 16:15 v7_windows_x86_64_8.0.0
+
+./.next/cache/swc/plugins/v7_windows_x86_64_8.0.0:
+total 8
+drwxrwxrwx 2 stephen stephen 4096 Mar 19 16:15 .
+drwxrwxrwx 3 stephen stephen 4096 Mar 19 16:15 ..
+
+./.next/cache/webpack:
+total 16
+drwxrwxrwx 4 stephen stephen 4096 Mar 19 16:15 .
+drwxrwxrwx 4 stephen stephen 4096 Mar 19 16:15 ..
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:04 client-development
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:05 server-development
+
+./.next/cache/webpack/client-development:
+total 24432
+drwxrwxrwx 2 stephen stephen     4096 Mar 20 07:04 .
+drwxrwxrwx 4 stephen stephen     4096 Mar 19 16:15 ..
+-rwxrwxrwx 1 stephen stephen    44289 Mar 19 16:13 0.pack.gz
+-rwxrwxrwx 1 stephen stephen 14082775 Mar 20 07:03 1.pack.gz
+-rwxrwxrwx 1 stephen stephen    37241 Mar 19 17:26 2.pack.gz
+-rwxrwxrwx 1 stephen stephen  2421864 Mar 19 16:20 3.pack.gz
+-rwxrwxrwx 1 stephen stephen  7350595 Mar 19 17:28 4.pack.gz
+-rwxrwxrwx 1 stephen stephen    25422 Mar 20 07:04 5.pack.gz
+-rwxrwxrwx 1 stephen stephen   254632 Mar 20 07:03 6.pack.gz
+-rwxrwxrwx 1 stephen stephen   382961 Mar 20 07:04 index.pack.gz
+-rwxrwxrwx 1 stephen stephen   382954 Mar 20 07:03 index.pack.gz.old
+
+./.next/cache/webpack/server-development:
+total 22028
+drwxrwxrwx 2 stephen stephen     4096 Mar 20 07:05 .
+drwxrwxrwx 4 stephen stephen     4096 Mar 19 16:15 ..
+-rwxrwxrwx 1 stephen stephen 14413150 Mar 20 07:05 0.pack.gz
+-rwxrwxrwx 1 stephen stephen   396936 Mar 20 07:04 1.pack.gz
+-rwxrwxrwx 1 stephen stephen  2376731 Mar 19 16:20 2.pack.gz
+-rwxrwxrwx 1 stephen stephen   275164 Mar 19 17:28 3.pack.gz
+-rwxrwxrwx 1 stephen stephen  4470780 Mar 19 17:28 4.pack.gz
+-rwxrwxrwx 1 stephen stephen   301029 Mar 20 07:05 index.pack.gz
+-rwxrwxrwx 1 stephen stephen   300393 Mar 20 07:03 index.pack.gz.old
+
+./.next/server:
+total 68
+drwxrwxrwx 4 stephen stephen 4096 Mar 20 07:03 .
+drwxrwxrwx 6 stephen stephen 4096 Mar 20 07:23 ..
+drwxrwxrwx 3 stephen stephen 4096 Mar 20 07:03 app
+-rwxrwxrwx 1 stephen stephen   76 Mar 20 07:03 app-paths-manifest.json
+-rwxrwxrwx 1 stephen stephen   47 Mar 20 07:03 interception-route-rewrite-manifest.js
+-rwxrwxrwx 1 stephen stephen  513 Mar 20 07:03 middleware-build-manifest.js
+-rwxrwxrwx 1 stephen stephen   83 Mar 20 07:03 middleware-manifest.json
+-rwxrwxrwx 1 stephen stephen  751 Mar 20 07:03 middleware-react-loadable-manifest.js
+-rwxrwxrwx 1 stephen stephen  113 Mar 20 07:03 next-font-manifest.js
+-rwxrwxrwx 1 stephen stephen   77 Mar 20 07:03 next-font-manifest.json
+-rwxrwxrwx 1 stephen stephen    2 Mar 20 07:03 pages-manifest.json
+-rwxrwxrwx 1 stephen stephen  140 Mar 20 07:03 server-reference-manifest.js
+-rwxrwxrwx 1 stephen stephen   97 Mar 20 07:03 server-reference-manifest.json
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 vendor-chunks
+-rwxrwxrwx 1 stephen stephen 8689 Mar 20 07:03 webpack-runtime.js
+
+./.next/server/app:
+total 376
+drwxrwxrwx 3 stephen stephen   4096 Mar 20 07:03 .
+drwxrwxrwx 4 stephen stephen   4096 Mar 20 07:03 ..
+drwxrwxrwx 2 stephen stephen   4096 Mar 20 07:03 _not-found
+-rwxrwxrwx 1 stephen stephen 359592 Mar 20 07:03 page.js
+-rwxrwxrwx 1 stephen stephen  11896 Mar 20 07:03 page_client-reference-manifest.js
+
+./.next/server/app/_not-found:
+total 292
+drwxrwxrwx 2 stephen stephen   4096 Mar 20 07:03 .
+drwxrwxrwx 3 stephen stephen   4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen 277882 Mar 20 07:03 page.js
+-rwxrwxrwx 1 stephen stephen  11980 Mar 20 07:03 page_client-reference-manifest.js
+
+./.next/server/vendor-chunks:
+total 9312
+drwxrwxrwx 2 stephen stephen    4096 Mar 20 07:03 .
+drwxrwxrwx 4 stephen stephen    4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen  175837 Mar 20 07:03 @adraffy.js
+-rwxrwxrwx 1 stephen stephen 1744306 Mar 20 07:03 @dfinity.js
+-rwxrwxrwx 1 stephen stephen  533952 Mar 20 07:03 @noble.js
+-rwxrwxrwx 1 stephen stephen   13573 Mar 20 07:03 @swc.js
+-rwxrwxrwx 1 stephen stephen   11899 Mar 20 07:03 base64-js.js
+-rwxrwxrwx 1 stephen stephen  247190 Mar 20 07:03 bignumber.js.js
+-rwxrwxrwx 1 stephen stephen  188595 Mar 20 07:03 borc.js
+-rwxrwxrwx 1 stephen stephen  156614 Mar 20 07:03 buffer.js
+-rwxrwxrwx 1 stephen stephen 1626227 Mar 20 07:03 ethers.js
+-rwxrwxrwx 1 stephen stephen   31840 Mar 20 07:03 idb.js
+-rwxrwxrwx 1 stephen stephen    7228 Mar 20 07:03 ieee754.js
+-rwxrwxrwx 1 stephen stephen    8077 Mar 20 07:03 iso-url.js
+-rwxrwxrwx 1 stephen stephen 4696592 Mar 20 07:03 next.js
+-rwxrwxrwx 1 stephen stephen   50929 Mar 20 07:03 simple-cbor.js
+
+./.next/static:
+total 28
+drwxrwxrwx 7 stephen stephen 4096 Mar 20 07:03 .
+drwxrwxrwx 6 stephen stephen 4096 Mar 20 07:23 ..
+drwxrwxrwx 3 stephen stephen 4096 Mar 20 07:03 chunks
+drwxrwxrwx 3 stephen stephen 4096 Mar 20 07:03 css
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 development
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 media
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 webpack
+
+./.next/static/chunks:
+total 6816
+drwxrwxrwx 3 stephen stephen    4096 Mar 20 07:03 .
+drwxrwxrwx 7 stephen stephen    4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen    6401 Mar 20 07:03 _app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js
+drwxrwxrwx 3 stephen stephen    4096 Mar 20 07:03 app
+-rwxrwxrwx 1 stephen stephen  227027 Mar 20 07:03 app-pages-internals.js
+-rwxrwxrwx 1 stephen stephen 6555612 Mar 20 07:03 main-app.js
+-rwxrwxrwx 1 stephen stephen  112594 Mar 20 07:03 polyfills.js
+-rwxrwxrwx 1 stephen stephen   56246 Mar 20 07:03 webpack.js
+
+./.next/static/chunks/app:
+total 7684
+drwxrwxrwx 3 stephen stephen    4096 Mar 20 07:03 .
+drwxrwxrwx 3 stephen stephen    4096 Mar 20 07:03 ..
+drwxrwxrwx 2 stephen stephen    4096 Mar 20 07:03 _not-found
+-rwxrwxrwx 1 stephen stephen 5356769 Mar 20 07:03 layout.js
+-rwxrwxrwx 1 stephen stephen 2490968 Mar 20 07:03 page.js
+
+./.next/static/chunks/app/_not-found:
+total 32
+drwxrwxrwx 2 stephen stephen  4096 Mar 20 07:03 .
+drwxrwxrwx 3 stephen stephen  4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen 24075 Mar 20 07:03 page.js
+
+./.next/static/css:
+total 12
+drwxrwxrwx 3 stephen stephen 4096 Mar 20 07:03 .
+drwxrwxrwx 7 stephen stephen 4096 Mar 20 07:03 ..
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 app
+
+./.next/static/css/app:
+total 68
+drwxrwxrwx 2 stephen stephen  4096 Mar 20 07:03 .
+drwxrwxrwx 3 stephen stephen  4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen 60967 Mar 20 07:03 layout.css
+
+./.next/static/development:
+total 16
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 .
+drwxrwxrwx 7 stephen stephen 4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen  238 Mar 20 07:03 _buildManifest.js
+-rwxrwxrwx 1 stephen stephen   76 Mar 20 07:03 _ssgManifest.js
+
+./.next/static/media:
+total 224
+drwxrwxrwx 2 stephen stephen  4096 Mar 20 07:03 .
+drwxrwxrwx 7 stephen stephen  4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen 18820 Mar 20 07:03 26a46d62cd723877-s.woff2
+-rwxrwxrwx 1 stephen stephen 25908 Mar 20 07:03 55c55f0601d81cf3-s.woff2
+-rwxrwxrwx 1 stephen stephen 19072 Mar 20 07:03 581909926a08bbc8-s.woff2
+-rwxrwxrwx 1 stephen stephen 74316 Mar 20 07:03 6d93bde91c0c2823-s.woff2
+-rwxrwxrwx 1 stephen stephen 11220 Mar 20 07:03 97e0cb1ae144a2a9-s.woff2
+-rwxrwxrwx 1 stephen stephen 48556 Mar 20 07:03 a34f9d1faa5f3315-s.p.woff2
+-rwxrwxrwx 1 stephen stephen 10280 Mar 20 07:03 df0a9ae256c0569c-s.woff2
+
+./.next/static/webpack:
+total 20
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 .
+drwxrwxrwx 7 stephen stephen 4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen   31 Mar 20 07:03 03be31068fb9ef30.webpack.hot-update.json
+-rwxrwxrwx 1 stephen stephen   22 Mar 20 07:03 633457081244afec._.hot-update.json
+-rwxrwxrwx 1 stephen stephen  839 Mar 20 07:03 webpack.03be31068fb9ef30.hot-update.js
+
+./.next/types:
+total 24
+drwxrwxrwx 3 stephen stephen 4096 Mar 20 07:03 .
+drwxrwxrwx 6 stephen stephen 4096 Mar 20 07:23 ..
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 app
+-rwxrwxrwx 1 stephen stephen 5861 Mar 20 07:03 cache-life.d.ts
+-rwxrwxrwx 1 stephen stephen   18 Mar 20 07:03 package.json
+
+./.next/types/app:
+total 16
+drwxrwxrwx 2 stephen stephen 4096 Mar 20 07:03 .
+drwxrwxrwx 3 stephen stephen 4096 Mar 20 07:03 ..
+-rwxrwxrwx 1 stephen stephen 3708 Mar 20 07:03 layout.ts
+-rwxrwxrwx 1 stephen stephen 3696 Mar 20 07:03 page.ts
+
+./app:
+total 88
+drwxr-xr-x 17 stephen stephen  4096 Mar 27 15:49 .
+drwx------ 18 stephen stephen  4096 Mar 27 15:57 ..
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 auth
+drwxr-xr-x  3 stephen stephen  4096 Mar 20 15:20 contracts
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 dashboard
+drwxr-xr-x  3 stephen stephen  4096 Mar 20 15:20 disputes
+drwxr-xr-x  3 stephen stephen  4096 Mar 20 15:20 escrow
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 faq
+drwxr-xr-x  3 stephen stephen  4096 Mar 20 15:20 freelancers
+-rwxr-xr-x  1 stephen stephen   514 Mar 20 15:20 globals.css
+drwxr-xr-x  2 stephen stephen  4096 Mar 27 15:49 idl
+drwxr-xr-x  4 stephen stephen  4096 Mar 20 15:20 jobs
+-rwxr-xr-x  1 stephen stephen   992 Mar 20 15:20 layout.tsx
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 login
+drwxr-xr-x  3 stephen stephen  4096 Mar 20 15:20 messages
+-rwxr-xr-x  1 stephen stephen 10059 Mar 20 15:20 page.tsx
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 privacy-policy
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 settings
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 terms
+drwxr-xr-x  3 stephen stephen  4096 Mar 20 15:20 users
+
+./app/auth:
+total 12
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+-rwxr-xr-x  1 stephen stephen 2815 Mar 20 15:20 page.tsx
+
+./app/contracts:
+total 12
+drwxr-xr-x  3 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 create
+
+./app/contracts/create:
+total 24
+drwxr-xr-x 2 stephen stephen  4096 Mar 20 15:20 .
+drwxr-xr-x 3 stephen stephen  4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 15558 Mar 20 15:20 page.tsx
+
+./app/dashboard:
+total 20
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen  4096 Mar 27 15:49 ..
+-rwxr-xr-x  1 stephen stephen 10889 Mar 20 15:20 page.tsx
+
+./app/disputes:
+total 20
+drwxr-xr-x  3 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 create
+-rwxr-xr-x  1 stephen stephen 7716 Mar 20 15:20 page.tsx
+
+./app/disputes/create:
+total 16
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 4500 Mar 20 15:20 page.tsx
+
+./app/escrow:
+total 20
+drwxr-xr-x  3 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 [id]
+-rwxr-xr-x  1 stephen stephen 5169 Mar 20 15:20 page.tsx
+
+./app/escrow/[id]:
+total 20
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 9030 Mar 20 15:20 page.tsx
+
+./app/faq:
+total 12
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+-rwxr-xr-x  1 stephen stephen 3049 Mar 20 15:20 page.tsx
+
+./app/freelancers:
+total 28
+drwxr-xr-x  3 stephen stephen  4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen  4096 Mar 27 15:49 ..
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 [id]
+-rwxr-xr-x  1 stephen stephen 12293 Mar 20 15:20 page.tsx
+
+./app/freelancers/[id]:
+total 24
+drwxr-xr-x 2 stephen stephen  4096 Mar 20 15:20 .
+drwxr-xr-x 3 stephen stephen  4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 12382 Mar 20 15:20 page.tsx
+
+./app/idl:
+total 12
+drwxr-xr-x  2 stephen stephen 4096 Mar 27 15:49 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+-rwxr-xr-x  1 stephen stephen  990 Mar 27 15:49 freelance.did.ts
+
+./app/jobs:
+total 28
+drwxr-xr-x  4 stephen stephen  4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen  4096 Mar 27 15:49 ..
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 [id]
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 create
+-rwxr-xr-x  1 stephen stephen 10130 Mar 20 15:20 page.tsx
+
+./app/jobs/[id]:
+total 20
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 9489 Mar 20 15:20 page.tsx
+
+./app/jobs/create:
+total 28
+drwxr-xr-x 2 stephen stephen  4096 Mar 20 15:20 .
+drwxr-xr-x 4 stephen stephen  4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 16901 Mar 20 15:20 page.tsx
+
+./app/login:
+total 12
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+-rwxr-xr-x  1 stephen stephen    1 Mar 20 15:20 page.tsx
+
+./app/messages:
+total 24
+drwxr-xr-x  3 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 [id]
+-rwxr-xr-x  1 stephen stephen 9431 Mar 20 15:20 page.tsx
+
+./app/messages/[id]:
+total 20
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 8770 Mar 20 15:20 page.tsx
+
+./app/privacy-policy:
+total 16
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+-rwxr-xr-x  1 stephen stephen 4382 Mar 20 15:20 page.tsx
+
+./app/settings:
+total 16
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+-rwxr-xr-x  1 stephen stephen 6742 Mar 20 15:20 page.tsx
+
+./app/terms:
+total 16
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+-rwxr-xr-x  1 stephen stephen 6398 Mar 20 15:20 page.tsx
+
+./app/users:
+total 12
+drwxr-xr-x  3 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 17 stephen stephen 4096 Mar 27 15:49 ..
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 [id]
+
+./app/users/[id]:
+total 16
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 4988 Mar 20 15:20 page.tsx
+
+./canisters:
+total 12
+drwxr-xr-x  3 stephen stephen 4096 Mar 20 08:02 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 08:54 freelance
+
+./canisters/freelance:
+total 40
+drwxr-xr-x 2 stephen stephen  4096 Mar 20 08:54 .
+drwxr-xr-x 3 stephen stephen  4096 Mar 20 08:02 ..
+-rwxr-xr-x 1 stephen stephen   706 Mar 20 15:20 ICRC1.mo
+-rwxr-xr-x 1 stephen stephen 26972 Mar 27 15:31 main.mo
+
+./components:
+total 96
+drwxr-xr-x  7 stephen stephen  4096 Mar 20 15:20 .
+drwx------ 18 stephen stephen  4096 Mar 27 15:57 ..
+-rwxr-xr-x  1 stephen stephen  1227 Mar 20 15:20 ErrorBoundary.tsx
+-rwxr-xr-x  1 stephen stephen  7564 Mar 20 15:20 Footer.tsx
+-rwxr-xr-x  1 stephen stephen   943 Mar 20 15:20 ICPLoginButton.tsx
+-rwxr-xr-x  1 stephen stephen  2134 Mar 20 15:20 JobCard.tsx
+-rwxr-xr-x  1 stephen stephen 13709 Mar 20 15:20 Navbar.tsx
+-rwxr-xr-x  1 stephen stephen  1803 Mar 20 15:20 Pagination.tsx
+-rwxr-xr-x  1 stephen stephen  2136 Mar 20 15:20 PortfolioCard.tsx
+-rwxr-xr-x  1 stephen stephen   586 Mar 20 15:20 ProtectedRoute.tsx
+-rwxr-xr-x  1 stephen stephen  3565 Mar 20 15:20 RequestServiceModal.tsx
+-rwxr-xr-x  1 stephen stephen  1156 Mar 20 15:20 ReviewCard.tsx
+-rwxr-xr-x  1 stephen stephen  6424 Mar 20 15:20 ReviewModal.tsx
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 auth
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 dashboard
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 freelancers
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 jobs
+-rwxr-xr-x  1 stephen stephen   457 Mar 20 15:20 layout.tsx
+drwxr-xr-x  2 stephen stephen  4096 Mar 20 15:20 providers
+
+./components/auth:
+total 16
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 7 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen    1 Mar 20 15:20 ConnectWalletButton.tsx
+-rwxr-xr-x 1 stephen stephen    1 Mar 20 15:20 ICPLoginButton.tsx
+
+./components/dashboard:
+total 48
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 7 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen    1 Mar 20 15:20 ActiveJobs.tsx
+-rwxr-xr-x 1 stephen stephen    1 Mar 20 15:20 DashboardStats.tsx
+-rwxr-xr-x 1 stephen stephen 1554 Mar 20 15:20 EarningsChart.tsx
+-rwxr-xr-x 1 stephen stephen 2088 Mar 20 15:20 JobCard.tsx
+-rwxr-xr-x 1 stephen stephen 1791 Mar 20 15:20 JobFilters.tsx
+-rwxr-xr-x 1 stephen stephen 2554 Mar 20 15:20 NotificationCenter.tsx
+-rwxr-xr-x 1 stephen stephen  979 Mar 20 15:20 StatCard.tsx
+-rwxr-xr-x 1 stephen stephen 4416 Mar 20 15:20 TaskList.tsx
+-rwxr-xr-x 1 stephen stephen 3200 Mar 20 15:20 TaskModal.tsx
+
+./components/freelancers:
+total 24
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 7 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 2239 Mar 20 15:20 ContactSection.tsx
+-rwxr-xr-x 1 stephen stephen 5586 Mar 20 15:20 PortfolioSection.tsx
+-rwxr-xr-x 1 stephen stephen 2260 Mar 20 15:20 StatsSection.tsx
+
+./components/jobs:
+total 24
+drwxr-xr-x 2 stephen stephen  4096 Mar 20 15:20 .
+drwxr-xr-x 7 stephen stephen  4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen 14965 Mar 20 15:20 ProposalForm.tsx
+
+./components/providers:
+total 12
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 7 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen  488 Mar 20 15:20 ToasterProvider.tsx
+
+./contexts:
+total 12
+drwxrwxrwx  2 stephen stephen 4096 Mar 19 16:02 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+-rwxrwxrwx  1 stephen stephen 3227 Mar 20 15:20 ICPContext.tsx
+
+./contracts:
+total 16
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+-rwxr-xr-x  1 stephen stephen 2335 Mar 20 15:20 DisputeContract.ts
+-rwxr-xr-x  1 stephen stephen 3293 Mar 20 15:20 EscrowContract.ts
+
+./declarations:
+total 16
+drwxr-xr-x  3 stephen stephen 4096 Mar 20 15:20 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 freelance
+-rwxr-xr-x  1 stephen stephen  379 Mar 20 15:20 index.d.ts
+
+./declarations/freelance:
+total 12
+drwxr-xr-x 2 stephen stephen 4096 Mar 20 15:20 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 20 15:20 ..
+-rwxr-xr-x 1 stephen stephen  990 Mar 20 15:20 freelance.did.ts
+
+./hooks:
+total 20
+drwxr-xr-x  2 stephen stephen 4096 Mar 20 15:20 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+-rwxr-xr-x  1 stephen stephen 4419 Mar 20 15:20 useWallet.ts
+-rwxr-xr-x  1 stephen stephen 2017 Mar 20 15:20 useWebSocket.ts
+
+./providers:
+total 12
+drwxrwxrwx  2 stephen stephen 4096 Mar 19 16:02 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+-rwxrwxrwx  1 stephen stephen    1 Mar 19 16:02 Web3Provider.tsx
+
+./services:
+total 16
+drwxrwxrwx  2 stephen stephen 4096 Mar 19 16:02 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+-rwxrwxrwx  1 stephen stephen 3828 Mar 19 16:02 icp-service.ts
+-rwxrwxrwx  1 stephen stephen  966 Mar 19 16:02 icp.ts
+
+./src:
+total 16
+drwxr-xr-x  4 stephen stephen 4096 Mar 27 15:48 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+drwxr-xr-x  3 stephen stephen 4096 Mar 27 15:43 declarations
+drwxr-xr-x  2 stephen stephen 4096 Mar 27 15:48 idl
+
+./src/declarations:
+total 12
+drwxr-xr-x 3 stephen stephen 4096 Mar 27 15:43 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 27 15:48 ..
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:43 freelance
+
+./src/declarations/freelance:
+total 28
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:43 .
+drwxr-xr-x 3 stephen stephen 4096 Mar 27 15:43 ..
+-rw-r--r-- 1 stephen stephen 2518 Mar 27 15:43 freelance.did
+-rw-r--r-- 1 stephen stephen 3223 Mar 27 15:43 freelance.did.d.ts
+-rw-r--r-- 1 stephen stephen 3613 Mar 27 15:43 freelance.did.js
+-rw-r--r-- 1 stephen stephen 1617 Mar 27 15:43 index.d.ts
+-rw-r--r-- 1 stephen stephen 1372 Mar 27 15:43 index.js
+
+./src/idl:
+total 12
+drwxr-xr-x 2 stephen stephen 4096 Mar 27 15:48 .
+drwxr-xr-x 4 stephen stephen 4096 Mar 27 15:48 ..
+-rwxr-xr-x 1 stephen stephen  990 Mar 27 15:48 freelance.did.ts
+
+./styles:
+total 12
+drwxrwxrwx  2 stephen stephen 4096 Mar 19 16:02 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+-rwxrwxrwx  1 stephen stephen 1153 Mar 19 16:02 calendar.css
+
+./types:
+total 16
+drwxrwxrwx  2 stephen stephen 4096 Mar 19 16:02 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+-rwxrwxrwx  1 stephen stephen  119 Mar 19 16:02 global.d.ts
+-rwxrwxrwx  1 stephen stephen 3389 Mar 19 16:02 index.ts
+
+./utils:
+total 12
+drwxrwxrwx  2 stephen stephen 4096 Mar 19 16:02 .
+drwx------ 18 stephen stephen 4096 Mar 27 15:57 ..
+-rwxrwxrwx  1 stephen stephen  260 Mar 19 16:02 polyfills.ts

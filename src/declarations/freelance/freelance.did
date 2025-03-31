@@ -1,0 +1,125 @@
+type User = 
+ record {
+   bio: opt text;
+   completedJobs: nat;
+   createdAt: Time;
+   hourlyRate: opt nat;
+   id: principal;
+   rating: float64;
+   skills: vec text;
+   totalEarnings: nat;
+   username: text;
+ };
+type Time = int;
+type Result_2 = 
+ variant {
+   err: text;
+   ok: principal;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: text;
+ };
+type Rating = 
+ record {
+   comment: text;
+   createdAt: Time;
+   fromId: principal;
+   id: text;
+   jobId: text;
+   score: float64;
+   toId: principal;
+ };
+type Proposal = 
+ record {
+   bid: nat;
+   coverLetter: text;
+   createdAt: Time;
+   freelancerId: principal;
+   id: text;
+   jobId: text;
+   status: variant {
+             accepted;
+             pending;
+             rejected;
+           };
+ };
+type PaymentToken = 
+ variant {
+   ICP;
+   ICRC1: text;
+ };
+type Milestone = 
+ record {
+   amount: nat;
+   description: text;
+   dueDate: Time;
+   id: text;
+   jobId: text;
+   status: variant {
+             completed;
+             paid;
+             pending;
+           };
+   title: text;
+ };
+type Job = 
+ record {
+   budget: nat;
+   category: text;
+   clientId: principal;
+   deadline: Time;
+   description: text;
+   experienceLevel: text;
+   id: text;
+   projectLength: text;
+   skills: vec text;
+   status: variant {
+             completed;
+             in_progress;
+             open;
+           };
+   title: text;
+ };
+type Dispute = 
+ record {
+   clientId: principal;
+   createdAt: Time;
+   evidence: text;
+   freelancerId: principal;
+   id: text;
+   jobId: text;
+   reason: text;
+   resolution: opt text;
+   status: variant {
+             pending;
+             rejected;
+             resolved;
+           };
+ };
+service : {
+  addMilestone: (Milestone) -> (Result);
+  completeMilestone: (text) -> (Result_1);
+  createDispute: (Dispute) -> (Result);
+  createEscrow: (text, nat, PaymentToken) -> (Result);
+  createJob: (Job) -> (Result);
+  createMilestoneEscrow: (text, text, nat, PaymentToken) -> (Result);
+  createUser: (User) -> (Result_2);
+  disputeEscrow: (text, text) -> (Result);
+  getJob: (text) -> (opt Job) query;
+  getUser: (principal) -> (opt User) query;
+  listJobs: () -> (vec Job) query;
+  refundEscrow: (text) -> (Result_1);
+  releaseEscrow: (text) -> (Result_1);
+  releaseMilestoneEscrow: (text) -> (Result_1);
+  releasePayment: (text) -> (Result_1);
+  resolveDispute: (text, text, bool) -> (Result_1);
+  submitProposal: (text, Proposal) -> (Result);
+  submitRating: (Rating) -> (Result);
+}
