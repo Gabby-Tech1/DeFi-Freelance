@@ -1,7 +1,7 @@
+import { idlFactory } from '@/app/idl/freelance.did';
 import { Actor, HttpAgent, Identity } from '@dfinity/agent';
 import { AuthClient } from '@dfinity/auth-client';
 import { Principal } from '@dfinity/principal';
-import { idlFactory } from '@/declarations/freelance/freelance.did';
 
 class ICPService {
   private agent: HttpAgent;
