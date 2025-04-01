@@ -56,9 +56,18 @@ export function useWallet() {
         }
       };
     }
+
+    // Cleanup function to handle unmounting
+    return () => {
+      setAddress(null);
+      setIsConnecting(false);
+      setError(null);
+    };
   }, []);
 
   const connectWallet = async () => {
+    if (isConnecting) return; // Prevent multiple connection attempts
+    
     setIsConnecting(true);
     setError(null);
 
@@ -68,53 +77,38 @@ export function useWallet() {
       }
 
       if (!window.ethereum) {
-        throw new Error(
-          'No wallet found. Please install MetaMask or another web3 wallet'
-        );
+        throw new Error('No wallet found. Please install MetaMask or another web3 wallet');
       }
 
       const provider = new ethers.BrowserProvider(window.ethereum);
 
       try {
-        const accounts = await provider.send("eth_requestAccounts", []);
-        
+        // Add timeout to prevent hanging
+        const accounts = await Promise.race([
+          provider.send("eth_requestAccounts", []),
+          new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Connection timeout')), 10000)
+          )
+        ]) as string[];
+
         if (accounts.length > 0) {
           setAddress(accounts[0]);
           return accounts[0];
         } else {
           throw new Error('No accounts found');
         }
-      } catch (err) {
-        // Handle specific MetaMask errors
-        if (err instanceof Error) {
-          if ('code' in err) {
-            const ethErr = err as { code: number; message: string };
-            switch (ethErr.code) {
-              case 4001:
-                throw new Error('Please approve the connection request in your wallet');
-              case -32002:
-                throw new Error('Please check your MetaMask wallet - a connection request is pending');
-              default:
-                throw new Error(`Wallet connection failed: ${ethErr.message}`);
-            }
-          }
-          throw err;
+      } catch (err: any) {
+        if (err.code === -32002) {
+          throw new Error('Wallet connection already pending. Please check your wallet');
         }
-        throw new Error('Failed to connect wallet');
+        throw err;
       }
-    } catch (err) {
-      let errorMessage = 'Failed to connect wallet';
-      if (err instanceof Error) {
-        errorMessage = err.message;
-      } else if (typeof err === 'string') {
-        errorMessage = err;
-      }
-      
+    } catch (err: any) {
+      const errorMessage = err.message || 'Failed to connect wallet';
       const walletError: WalletError = {
         message: errorMessage,
-        code: err instanceof Error && 'code' in err ? (err as any).code : undefined
+        code: err.code
       };
-      
       setError(walletError);
       throw walletError;
     } finally {

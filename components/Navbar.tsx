@@ -4,13 +4,17 @@ import Link from 'next/link';
 import { useWallet } from '@/hooks/useWallet';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useICP } from '@/contexts/ICPContext';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
-  const { isConnected, connectWallet, address, disconnectWallet, isConnecting } = useWallet();
+  const { isConnected, disconnectWallet, address, isConnecting } = useWallet();
+  const { isAuthenticated, principal, logout } = useICP();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [connectError, setConnectError] = useState<string | null>(null);
-  
+
   // Add scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -20,23 +24,25 @@ const Navbar = () => {
         setIsScrolled(false);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
-  const handleConnect = async () => {
-    try {
-      await connectWallet();
-      setConnectError(null);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to connect wallet';
-      setConnectError(errorMessage);
-      // Clear error after 5 seconds
-      setTimeout(() => setConnectError(null), 5000);
-    }
+
+  const handleAuthClick = () => {
+    router.push('/auth');
   };
-  
+
+  const handleLogout = async () => {
+    if (isConnected) {
+      await disconnectWallet();
+    }
+    if (isAuthenticated) {
+      await logout();
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
@@ -53,7 +59,7 @@ const Navbar = () => {
               </span>
             </Link>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-6">
             <Link href="/jobs" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Find Jobs
@@ -61,8 +67,8 @@ const Navbar = () => {
             <Link href="/freelancers" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Find Freelancers
             </Link>
-            
-            {isConnected ? (
+
+            {isAuthenticated || isConnected ? (
               <div className="flex items-center space-x-4">
                 <div className="relative">
                   <button 
@@ -71,22 +77,20 @@ const Navbar = () => {
                   >
                     <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
                       <span className="text-white text-xs font-bold">
-                        {address?.substring(2, 4).toUpperCase()}
+                        {principal ? principal.slice(0, 2) : address?.slice(2, 4).toUpperCase()}
                       </span>
                     </div>
                     <span className="text-sm font-medium">
-                      {address?.substring(0, 6)}...{address?.substring(address.length - 4)}
+                      {principal ? `${principal.slice(0, 6)}...${principal.slice(-4)}` : 
+                       address ? `${address.slice(0, 6)}...${address.slice(-4)}` : ''}
                     </span>
-                    <svg className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
                   </button>
-                  
+
                   {isMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl py-2 z-10 border border-gray-100 animate-fadeIn">
+                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl py-2 z-10 border border-gray-100">
                       <div className="px-4 py-2 border-b border-gray-100">
                         <p className="text-sm text-gray-500">Connected as</p>
-                        <p className="font-mono text-sm truncate">{address}</p>
+                        <p className="font-mono text-sm truncate">{principal || address}</p>
                       </div>
                       <Link 
                         href="/dashboard" 
@@ -140,10 +144,7 @@ const Navbar = () => {
                       </Link>
                       <div className="border-t border-gray-100 mt-2">
                         <button
-                          onClick={() => {
-                            disconnectWallet();
-                            setIsMenuOpen(false);
-                          }}
+                          onClick={handleLogout}
                           className="flex items-center w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50"
                         >
                           <svg className="w-5 h-5 mr-3 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -157,26 +158,18 @@ const Navbar = () => {
                 </div>
               </div>
             ) : (
-              <div className="relative">
-                <button
-                  onClick={handleConnect}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2.5 rounded-full hover:shadow-lg transition-all duration-200 flex items-center"
-                  disabled={isConnecting}
-                >
-                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  {isConnecting ? 'Connecting...' : 'Connect Wallet'}
-                </button>
-                {connectError && (
-                  <div className="absolute top-full mt-2 w-64 bg-red-50 border border-red-100 rounded-lg p-3 text-sm text-red-600">
-                    {connectError}
-                  </div>
-                )}
-              </div>
+              <button
+                onClick={handleAuthClick}
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2.5 rounded-full hover:shadow-lg transition-all duration-200 flex items-center"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Connect Wallet
+              </button>
             )}
           </div>
-          
+
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             <button
@@ -193,7 +186,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        
+
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t animate-fadeIn">
@@ -211,12 +204,12 @@ const Navbar = () => {
             >
               Find Freelancers
             </Link>
-            
-            {isConnected ? (
+
+            {isAuthenticated || isConnected ? (
               <>
                 <div className="py-3 border-t border-gray-100">
                   <p className="text-sm text-gray-500">Connected as</p>
-                  <p className="font-mono text-sm truncate">{address}</p>
+                  <p className="font-mono text-sm truncate">{principal || address}</p>
                 </div>
                 <Link 
                   href="/dashboard" 
@@ -261,10 +254,7 @@ const Navbar = () => {
                   Disputes
                 </Link>
                 <button
-                  onClick={() => {
-                    disconnectWallet();
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={handleLogout}
                   className="block w-full text-left py-3 text-red-600 hover:text-red-700 border-t border-gray-100 mt-2"
                 >
                   Disconnect
@@ -272,11 +262,8 @@ const Navbar = () => {
               </>
             ) : (
               <button
-                onClick={() => {
-                  connectWallet();
-                  setIsMenuOpen(false);
-                }}
-                className="mt-3 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200"
+                onClick={handleAuthClick}
+                className="w-full mt-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200"
               >
                 Connect Wallet
               </button>

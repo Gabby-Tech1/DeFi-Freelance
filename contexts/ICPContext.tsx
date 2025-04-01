@@ -1,8 +1,10 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { Identity } from '@dfinity/agent';
 import { Principal } from '@dfinity/principal';
 import { icpService } from '@/services/icp-service';
+import { authService, WalletType } from '@/services/auth-service';
 
 interface ICPContextType {
   isAuthenticated: boolean;
@@ -19,6 +21,8 @@ interface ICPContextType {
   submitProposal: (jobId: string, proposal: any) => Promise<any>;
   getEscrowDetails: (id: string) => Promise<any>;
   releaseMilestone: (escrowId: string, milestoneId: string) => Promise<void>;
+  walletType: WalletType | null;
+  connectWallet: (type: WalletType) => Promise<void>;
 }
 
 const ICPContext = createContext<ICPContextType>({} as ICPContextType);
@@ -28,30 +32,63 @@ export function ICPProvider({ children }: { children: ReactNode }) {
   const [principal, setPrincipal] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [walletType, setWalletType] = useState<WalletType | null>(null);
 
   useEffect(() => {
-    initAuth();
+    let mounted = true;
+
+    const init = async () => {
+      setIsLoading(true);
+      try {
+        const isAuthed = await authService.init();
+        if (!mounted) return;
+        
+        if (isAuthed) {
+          const identity = authService.getIdentity();
+          if (identity) {
+            setIsAuthenticated(true);
+            setPrincipal(identity.getPrincipal().toString());
+            setWalletType(authService.getWalletType());
+          }
+        }
+      } catch (err) {
+        console.error('Failed to initialize auth:', err);
+        if (mounted) {
+          setError('Failed to initialize authentication');
+        }
+      } finally {
+        if (mounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    init();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
-  async function initAuth() {
+  const connectWallet = async (type: WalletType) => {
+    if (isLoading) return;
+    
+    setIsLoading(true);
+    setError(null);
     try {
-      await icpService.init();
-      try {
-        const identity = await icpService.getIdentity();
-        setIsAuthenticated(true);
-        setPrincipal(identity.getPrincipal().toString());
-      } catch {
-        // Not authenticated, which is fine
-        setIsAuthenticated(false);
-        setPrincipal(null);
-      }
-    } catch (err) {
-      console.error('Failed to initialize auth:', err);
-      setError('Failed to initialize authentication');
+      const identity = await authService.connect(type);
+      setIsAuthenticated(true);
+      setPrincipal(identity.getPrincipal().toString());
+      setWalletType(type);
+    } catch (err: any) {
+      const errorMessage = err.message || 'Failed to connect wallet';
+      setError(errorMessage);
+      console.error('Wallet connection error:', err);
+      throw err;
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   const login = async () => {
     setIsLoading(true);
@@ -85,6 +122,8 @@ export function ICPProvider({ children }: { children: ReactNode }) {
       principal,
       isLoading,
       error,
+      walletType,
+      connectWallet,
       login,
       logout,
       createJob: icpService.createJob.bind(icpService),
@@ -101,4 +140,4 @@ export function ICPProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export const useICP = () => useContext(ICPContext); 
+export const useICP = () => useContext(ICPContext);

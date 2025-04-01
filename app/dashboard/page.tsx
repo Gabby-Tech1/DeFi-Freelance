@@ -23,6 +23,9 @@ import {
   StarIcon,
 } from '@heroicons/react/24/outline';
 import NotificationCenter from '@/components/dashboard/NotificationCenter';
+import { useRouter } from 'next/navigation';
+import { useICP } from '@/contexts/ICPContext';
+
 
 interface DashboardStats {
   totalEarnings: number;
@@ -137,6 +140,8 @@ const MOCK_TASKS = [
 ] as const;
 
 export default function Dashboard() {
+  const router = useRouter();
+  const { isAuthenticated, isLoading, error } = useICP();
   const { isConnected, connectWallet, address } = useWallet();
   const [userType, setUserType] = useState<'freelancer' | 'client'>('freelancer');
   const [stats, setStats] = useState<DashboardStats>({
@@ -148,7 +153,28 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [activeTab, setActiveTab] = useState('overview');
   const socket = useWebSocket();
-  
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.replace('/auth');
+    }
+  }, [isAuthenticated, isLoading, router]);
+
+  // Render loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+      </div>
+    );
+  }
+
+  // Render auth check state
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  // Render wallet connection prompt
   if (!isConnected) {
     return (
       <div className="text-center py-12">
@@ -164,6 +190,7 @@ export default function Dashboard() {
     );
   }
 
+  // Render main dashboard
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

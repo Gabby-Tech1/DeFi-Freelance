@@ -1,17 +1,43 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useWallet } from '@/hooks/useWallet';
+import { useICP } from '@/contexts/ICPContext';
+import { WalletType } from '@/services/auth-service';
+import toast from 'react-hot-toast';
 
 export default function Auth() {
   const router = useRouter();
-  const { isConnected, connectWallet } = useWallet();
-  const [authMethod, setAuthMethod] = useState<'icp' | 'stoic' | 'plug'>('icp');
+  const { isAuthenticated, connectWallet, isLoading, error } = useICP();
+  const [selectedWallet, setSelectedWallet] = useState<WalletType>('icp');
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  if (isConnected) {
-    router.push('/dashboard');
-    return null;
+  useEffect(() => {
+    if (isAuthenticated && !isNavigating) {
+      setIsNavigating(true);
+      // Add small delay to ensure state is updated
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 100);
+    }
+  }, [isAuthenticated, router]);
+
+  const handleConnect = async (type: WalletType) => {
+    try {
+      setSelectedWallet(type);
+      await connectWallet(type);
+    } catch (err: any) {
+      toast.error(err.message || `Failed to connect ${type.toUpperCase()} wallet`);
+      console.error('Connection error:', err);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+      </div>
+    );
   }
 
   return (
@@ -21,44 +47,53 @@ export default function Auth() {
         
         <div className="space-y-4">
           <button
-            onClick={() => {
-              setAuthMethod('icp');
-              connectWallet();
-            }}
-            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-4 rounded-lg hover:shadow-lg transition-all duration-200"
+            onClick={() => handleConnect('icp')}
+            className={`w-full ${
+              selectedWallet === 'icp'
+                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                : 'bg-white border border-gray-200 text-gray-800'
+            } px-6 py-4 rounded-lg hover:shadow-lg transition-all duration-200`}
           >
             <div className="flex items-center justify-center">
-              <img src="/icp-logo.svg" alt="ICP" className="w-6 h-6 mr-3" />
+              {/* <img src="/icp-logo.svg" alt="ICP" className="w-6 h-6 mr-3" /> */}
               Connect with Internet Identity
             </div>
           </button>
           
           <button
-            onClick={() => {
-              setAuthMethod('plug');
-              connectWallet();
-            }}
-            className="w-full bg-white border border-gray-200 text-gray-800 px-6 py-4 rounded-lg hover:shadow-lg transition-all duration-200"
+            onClick={() => handleConnect('plug')}
+            className={`w-full ${
+              selectedWallet === 'plug'
+                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                : 'bg-white border border-gray-200 text-gray-800'
+            } px-6 py-4 rounded-lg hover:shadow-lg transition-all duration-200`}
           >
             <div className="flex items-center justify-center">
-              <img src="/plug-logo.svg" alt="Plug" className="w-6 h-6 mr-3" />
+              {/* <img src="/plug-logo.svg" alt="Plug" className="w-6 h-6 mr-3" /> */}
               Connect with Plug Wallet
             </div>
           </button>
           
           <button
-            onClick={() => {
-              setAuthMethod('stoic');
-              connectWallet();
-            }}
-            className="w-full bg-white border border-gray-200 text-gray-800 px-6 py-4 rounded-lg hover:shadow-lg transition-all duration-200"
+            onClick={() => handleConnect('stoic')}
+            className={`w-full ${
+              selectedWallet === 'stoic'
+                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                : 'bg-white border border-gray-200 text-gray-800'
+            } px-6 py-4 rounded-lg hover:shadow-lg transition-all duration-200`}
           >
             <div className="flex items-center justify-center">
-              <img src="/stoic-logo.svg" alt="Stoic" className="w-6 h-6 mr-3" />
+              {/* <img src="/stoic-logo.svg" alt="Stoic" className="w-6 h-6 mr-3" /> */}
               Connect with Stoic Wallet
             </div>
           </button>
         </div>
+
+        {error && (
+          <div className="mt-4 p-4 bg-red-50 text-red-600 rounded-lg text-sm">
+            {error}
+          </div>
+        )}
         
         <div className="mt-8 text-center">
           <p className="text-gray-600 text-sm">
@@ -71,4 +106,4 @@ export default function Auth() {
       </div>
     </div>
   );
-} 
+}

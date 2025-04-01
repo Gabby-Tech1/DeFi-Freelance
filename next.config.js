@@ -29,6 +29,7 @@ const nextConfig = {
   },
   // Add output configuration
   output: 'standalone',
+  middleware: true,
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig

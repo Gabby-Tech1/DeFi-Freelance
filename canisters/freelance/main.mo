@@ -10,6 +10,7 @@ import Float "mo:base/Float";
 import Int "mo:base/Int";
 import Iter "mo:base/Iter";
 import ICRC1 "./ICRC1";
+import Types "./types";
 
 
 actor Freelance {
@@ -156,6 +157,10 @@ actor Freelance {
     private stable var escrowCounter: Nat = 0;
     private var milestoneEscrows = HashMap.HashMap<Text, MilestoneEscrow>(0, Text.equal, Text.hash);
     private stable var milestoneEscrowCounter: Nat = 0;
+    private var reputationNFTs = HashMap.HashMap<Text, ReputationNFT>(0, Text.equal, Text.hash);
+    private var stakingPools = HashMap.HashMap<Text, StakingPool>(0, Text.equal, Text.hash);
+    private var sponsoredJobs = HashMap.HashMap<Text, SponsoredJob>(0, Text.equal, Text.hash);
+    private var disputeVotes = HashMap.HashMap<Text, [DisputeVote]>(0, Text.equal, Text.hash);
 
     // Job Management
     public shared(msg) func createJob(job: Job) : async Result.Result<Text, Text> {
@@ -708,6 +713,115 @@ actor Freelance {
         }
     };
 
+    // Reputation NFT Management
+    public shared(msg) func mintReputationNFT(jobId: Text) : async Result.Result<Text, Text> {
+        let caller = msg.caller;
+        
+        switch (jobs.get(jobId)) {
+            case null return #err("Job not found");
+            case (?job) {
+                if (job.status != #completed) {
+                    return #err("Job must be completed to mint NFT");
+                };
+
+                let nftId = jobId # "-nft-" # Principal.toText(caller);
+                let nft = {
+                    id = nftId;
+                    freelancerId = caller;
+                    jobId = jobId;
+                    title = job.title;
+                    description = job.description;
+                    rating = 0.0; // Will be updated after client rating
+                    skills = job.skills;
+                    completionDate = Time.now();
+                    clientId = job.clientId;
+                    verified = true;
+                };
+
+                reputationNFTs.put(nftId, nft);
+                #ok(nftId)
+            };
+        }
+    };
+
+    // Staking Management
+    public shared(msg) func stake(poolId: Text, amount: Nat) : async Result.Result<(), Text> {
+        let caller = msg.caller;
+        
+        switch (stakingPools.get(poolId)) {
+            case null return #err("Pool not found");
+            case (?pool) {
+                // Implement staking logic
+                // Transfer tokens from caller to pool
+                // Update stakeholder balances
+                #ok(())
+            };
+        }
+    };
+
+    // Sponsored Job Management
+    public shared(msg) func sponsorJob(jobId: Text, amount: Nat, duration: Int) : async Result.Result<(), Text> {
+        let caller = msg.caller;
+        
+        switch (jobs.get(jobId)) {
+            case null return #err("Job not found");
+            case (?job) {
+                if (caller != job.clientId) {
+                    return #err("Only job owner can sponsor");
+                };
+
+                let sponsored = {
+                    jobId = jobId;
+                    clientId = caller;
+                    sponsorshipAmount = amount;
+                    startTime = Time.now();
+                    endTime = Time.now() + duration;
+                    featured = true;
+                };
+
+                sponsoredJobs.put(jobId, sponsored);
+                #ok(())
+            };
+        }
+    };
+
+    // Dispute Resolution
+    public shared(msg) func voteOnDispute(disputeId: Text, inFavorOfClient: Bool) : async Result.Result<(), Text> {
+        let caller = msg.caller;
+        
+        switch (disputes.get(disputeId)) {
+            case null return #err("Dispute not found");
+            case (?dispute) {
+                if (dispute.status != #pending) {
+                    return #err("Dispute is not pending");
+                };
+
+                let vote = {
+                    disputeId = disputeId;
+                    voterId = caller;
+                    voteWeight = 1; // Can be based on reputation/stake
+                    inFavorOfClient = inFavorOfClient;
+                    timestamp = Time.now();
+                };
+
+                // Add vote and check if threshold is reached
+                switch (disputeVotes.get(disputeId)) {
+                    case null disputeVotes.put(disputeId, [vote]);
+                    case (?votes) {
+                        let newVotes = Array.append<DisputeVote>(votes, [vote]);
+                        disputeVotes.put(disputeId, newVotes);
+                        
+                        // Check if voting threshold is reached
+                        if (newVotes.size() >= 10) { // Minimum votes required
+                            await resolveDisputeByVotes(disputeId);
+                        };
+                    };
+                };
+                #ok(())
+            };
+        }
+    };
+
     // Helper functions
      private func getAllUserRatings(userId: Principal) : [Rating] {
         let allRatings = Iter.toArray(ratings.entries());
@@ -758,4 +872,4 @@ actor Freelance {
         };
     }
   };
-} 
+}
