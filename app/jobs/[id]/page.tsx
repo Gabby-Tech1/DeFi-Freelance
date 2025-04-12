@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Job } from '@/types';
+import toast from 'react-hot-toast';
 
 const MOCK_JOB: Job = {
   id: '1',
@@ -50,8 +51,21 @@ export default function JobDetails() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle proposal submission
-    console.log('Submitting proposal:', proposal);
+    
+    try {
+      // Handle proposal submission
+      // In a real app, this would call an API
+      console.log('Submitting proposal:', proposal);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      toast.success('Proposal submitted successfully!');
+      setIsApplying(false);
+    } catch (error) {
+      console.error('Error submitting proposal:', error);
+      toast.error('Failed to submit proposal. Please try again.');
+    }
   };
 
   return (
@@ -236,4 +250,4 @@ export default function JobDetails() {
       </div>
     </div>
   );
-} 
+}

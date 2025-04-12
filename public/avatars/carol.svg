@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="100" fill="#EC4899" />
+  
+  <!-- Face -->
+  <circle cx="100" cy="85" r="40" fill="#F9FAFB" />
+  
+  <!-- Hair -->
+  <path d="M60 85 A40 40 0 0 1 140 85 L140 50 A40 40 0 0 0 60 50 Z" fill="#831843" />
+  <path d="M60 50 Q80 30 100 40 Q120 30 140 50 L140 55 A40 40 0 0 0 60 55 Z" fill="#831843" />
+  
+  <!-- Body/Shoulders -->
+  <path d="M60 120 Q100 140 140 120 L140 200 L60 200 Z" fill="#F9FAFB" />
+  
+  <!-- Eyes -->
+  <circle cx="85" cy="80" r="5" fill="#831843" />
+  <circle cx="115" cy="80" r="5" fill="#831843" />
+  
+  <!-- Smile -->
+  <path d="M85 100 Q100 110 115 100" fill="none" stroke="#831843" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Earrings -->
+  <circle cx="65" cy="85" r="3" fill="#FCD34D" />
+  <circle cx="135" cy="85" r="3" fill="#FCD34D" />
+  
+  <!-- Blush -->
+  <circle cx="75" cy="90" r="7" fill="#FECACA" opacity="0.6" />
+  <circle cx="125" cy="90" r="7" fill="#FECACA" opacity="0.6" />
+</svg>

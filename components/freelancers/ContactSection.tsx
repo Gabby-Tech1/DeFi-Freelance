@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 interface ContactSectionProps {
   freelancerName: string;
@@ -22,10 +23,17 @@ export default function ContactSection({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
-    // Implement message sending logic here
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsSending(false);
-    setMessage('');
+    try {
+      // Implement message sending logic here
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      toast.success(`Message sent to ${freelancerName} successfully!`);
+      setMessage('');
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast.error('Failed to send message. Please try again.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -67,4 +75,4 @@ export default function ContactSection({
       </form>
     </div>
   );
-} 
+}

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useWallet } from '@/hooks/useWallet';
 import { disputeContract } from '@/contracts/DisputeContract';
+import toast from 'react-hot-toast';
 
 export default function CreateDispute() {
   const router = useRouter();
@@ -43,11 +44,11 @@ export default function CreateDispute() {
         formData.reason,
         formData.evidence
       );
-      alert('Dispute created successfully! Transaction: ' + tx);
+      toast.success('Dispute created successfully!');
       router.push('/disputes');
     } catch (error) {
       console.error('Error creating dispute:', error);
-      alert('Failed to create dispute. Please try again.');
+      toast.error('Failed to create dispute. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -125,4 +126,4 @@ export default function CreateDispute() {
       </form>
     </div>
   );
-} 
+}

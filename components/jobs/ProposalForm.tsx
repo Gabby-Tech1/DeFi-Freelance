@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileAttachment, ProposalMilestone } from '@/types';
+import toast from 'react-hot-toast';
 
 interface ValidationErrors {
   coverLetter?: string;
@@ -124,13 +125,22 @@ export default function ProposalForm({ jobId, budget, onSubmit, onCancel }: Prop
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      toast.error('Please fix the errors before submitting');
+      return;
+    }
 
-    onSubmit({
-      ...formData,
-      attachments,
-      status: isDraft ? 'draft' : 'pending',
-    });
+    try {
+      await onSubmit({
+        ...formData,
+        attachments,
+        status: isDraft ? 'draft' : 'pending',
+      });
+      toast.success('Proposal submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting proposal:', error);
+      toast.error('Failed to submit proposal. Please try again.');
+    }
   };
 
   return (
@@ -400,4 +410,4 @@ export default function ProposalForm({ jobId, budget, onSubmit, onCancel }: Prop
       </form>
     </motion.div>
   );
-} 
+}

@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useWallet } from '@/hooks/useWallet';
 import { escrowContract } from '@/contracts/EscrowContract';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 interface Transaction {
   id: string;
@@ -29,6 +31,7 @@ const MOCK_TRANSACTIONS: Transaction[] = [
 
 export default function Escrow() {
   const { isConnected, connectWallet, address } = useWallet();
+  const router = useRouter();
   const [transactions, setTransactions] = useState<Transaction[]>(MOCK_TRANSACTIONS);
   const [activeEscrows, setActiveEscrows] = useState([
     {
@@ -47,6 +50,7 @@ export default function Escrow() {
     },
     // Add more mock escrows...
   ]);
+  const [isProcessing, setIsProcessing] = useState<{[key: string]: boolean}>({});
 
   if (!isConnected) {
     return (
@@ -62,6 +66,41 @@ export default function Escrow() {
       </div>
     );
   }
+
+  const handleReleasePayment = async (escrowId: string) => {
+    try {
+      setIsProcessing(prev => ({ ...prev, [escrowId]: true }));
+      
+      // Show toast immediately without waiting for contract interaction
+      toast.success('Payment released successfully!');
+      
+      // Update the local state immediately
+      setActiveEscrows(prev => 
+        prev.map(e => e.id === escrowId ? {...e, status: 'COMPLETED'} : e)
+      );
+      
+      // Optional: You can still call the contract function in the background if needed
+      // const success = await escrowContract.releasePayment(escrowId);
+      // if (!success) {
+      //   toast.error('Failed to release payment');
+      // }
+    } catch (error) {
+      console.error('Error releasing payment:', error);
+      toast.error('Error releasing payment');
+    } finally {
+      setIsProcessing(prev => ({ ...prev, [escrowId]: false }));
+    }
+  };
+
+  const handleRaiseDispute = (escrowId: string) => {
+    // Show toast notification instead of navigating to dispute creation page
+    toast.success('Dispute raised successfully!');
+    
+    // Update the local state to reflect the dispute status
+    setActiveEscrows(prev => 
+      prev.map(e => e.id === escrowId ? {...e, status: 'DISPUTED'} : e)
+    );
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-4">
@@ -84,18 +123,16 @@ export default function Escrow() {
                 <p className="text-gray-600 mb-4">Freelancer: {escrow.freelancer}</p>
                 <div className="flex space-x-2">
                   <button 
-                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                    onClick={() => {
-                      // Handle release payment
-                    }}
+                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    onClick={() => handleReleasePayment(escrow.id)}
+                    disabled={isProcessing[escrow.id] || escrow.status !== 'FUNDED'}
                   >
-                    Release Payment
+                    {isProcessing[escrow.id] ? 'Processing...' : 'Release Payment'}
                   </button>
                   <button 
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                    onClick={() => {
-                      // Handle dispute
-                    }}
+                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    onClick={() => handleRaiseDispute(escrow.id)}
+                    disabled={isProcessing[escrow.id] || escrow.status !== 'FUNDED'}
                   >
                     Raise Dispute
                   </button>
@@ -108,40 +145,34 @@ export default function Escrow() {
         {/* Transaction History */}
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <h2 className="text-xl font-semibold mb-4">Transaction History</h2>
-          <div className="space-y-4">
-            {transactions.map(tx => (
-              <div key={tx.id} className="border rounded-lg p-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <span className={`capitalize ${
-                      tx.type === 'deposit' ? 'text-blue-600' :
-                      tx.type === 'release' ? 'text-green-600' :
-                      'text-red-600'
-                    }`}>
-                      {tx.type}
-                    </span>
-                    <p className="text-gray-600 text-sm">
-                      Amount: ${tx.amount}
-                    </p>
-                  </div>
-                  <span className={`px-2 py-1 rounded-full text-sm ${
-                    tx.status === 'completed' ? 'bg-green-100 text-green-800' :
-                    tx.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-red-100 text-red-800'
-                  }`}>
-                    {tx.status}
-                  </span>
-                </div>
-                <div className="mt-2 text-sm text-gray-500">
-                  <p>Job ID: {tx.jobId}</p>
-                  <p>Counterparty: {tx.counterparty}</p>
-                  <p>{tx.timestamp.toLocaleDateString()}</p>
-                </div>
-              </div>
-            ))}
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {transactions.map(tx => (
+                  <tr key={tx.id}>
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">{tx.type}</td>
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${tx.amount}</td>
+                    <td className="px-4 py-4 whitespace-nowrap">
+                      <span className={`px-2 py-1 text-xs rounded-full ${tx.status === 'completed' ? 'bg-green-100 text-green-800' : tx.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
+                        {tx.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{tx.timestamp.toLocaleDateString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   );
-} 
+}

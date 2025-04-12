@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface RequestServiceModalProps {
   isOpen: boolean;
@@ -31,12 +32,18 @@ export default function RequestServiceModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({
-      ...formData,
-      budget: Number(formData.budget),
-      deadline: new Date(formData.deadline),
-    });
-    onClose();
+    try {
+      onSubmit({
+        ...formData,
+        budget: Number(formData.budget),
+        deadline: new Date(formData.deadline),
+      });
+      toast.success(`Service request sent to ${freelancerName} successfully!`);
+      onClose();
+    } catch (error) {
+      console.error('Error sending service request:', error);
+      toast.error('Failed to send service request. Please try again.');
+    }
   };
 
   return (
@@ -117,4 +124,4 @@ export default function RequestServiceModal({
       </div>
     </div>
   );
-} 
+}

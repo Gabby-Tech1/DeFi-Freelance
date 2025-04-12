@@ -31,7 +31,7 @@ export default function RootLayout({
           <Layout>
             {children}
           </Layout>
-          {/* <Toaster position="top-right" /> */}
+          <Toaster position="top-right" />
         </ICPProvider>
       </body>
     </html>
