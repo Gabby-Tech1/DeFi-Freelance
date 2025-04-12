@@ -12,158 +12,30 @@ import Iter "mo:base/Iter";
 import ICRC1 "./ICRC1";
 import Types "./types";
 
-
 actor Freelance {
-    // Types
-    type Job = {
-        id: Text;
-        title: Text;
-        description: Text;
-        budget: Nat;
-        deadline: Time.Time;
-        clientId: Principal;
-        skills: [Text];
-        status: {
-            #open;
-            #in_progress;
-            #completed;
-        };
-        category: Text;
-        experienceLevel: Text;
-        projectLength: Text;
-    };
-
-    type User = {
-        id: Principal;
-        username: Text;
-        bio: ?Text;
-        skills: [Text];
-        rating: Float;
-        hourlyRate: ?Nat;
-        totalEarnings: Nat;
-        completedJobs: Nat;
-        createdAt: Time.Time;
-    };
-
-    type Proposal = {
-        id: Text;
-        jobId: Text;
-        freelancerId: Principal;
-        coverLetter: Text;
-        bid: Nat;
-        status: {
-            #pending;
-            #accepted;
-            #rejected;
-        };
-        createdAt: Time.Time;
-    };
-
-    type Rating = {
-        id: Text;
-        jobId: Text;
-        fromId: Principal;
-        toId: Principal;
-        score: Float;
-        comment: Text;
-        createdAt: Time.Time;
-    };
-
-    type Dispute = {
-        id: Text;
-        jobId: Text;
-        clientId: Principal;
-        freelancerId: Principal;
-        reason: Text;
-        evidence: Text;
-        status: {
-            #pending;
-            #resolved;
-            #rejected;
-        };
-        resolution: ?Text;
-        createdAt: Time.Time;
-    };
-
-    type Milestone = {
-        id: Text;
-        jobId: Text;
-        title: Text;
-        description: Text;
-        amount: Nat;
-        status: {
-            #pending;
-            #completed;
-            #paid;
-        };
-        dueDate: Time.Time;
-    };
-
-    type EscrowAccount = {
-        id: Text;
-        jobId: Text;
-        clientId: Principal;
-        freelancerId: Principal;
-        amount: Nat;
-        status: {
-            #funded;
-            #released;
-            #refunded;
-            #disputed;
-        };
-        milestoneId: ?Text;
-        createdAt: Time.Time;
-    };
-
-    type PaymentToken = {
-        #ICP;
-        #ICRC1: Text; // Token canister ID
-    };
-
-    type MilestoneEscrow = {
-        id: Text;
-        jobId: Text;
-        milestoneId: Text;
-        clientId: Principal;
-        freelancerId: Principal;
-        amount: Nat;
-        status: {
-            #pending;
-            #funded;
-            #released;
-            #disputed;
-        };
-        token: PaymentToken;
-        createdAt: Time.Time;
-    };
-
-    type TokenTransfer = {
-        to: Principal;
-        amount: Nat;
-        token: PaymentToken;
-    };
+    
 
     // State
     let selfPrincipal = Principal.fromText("bkyz2-fmaaa-aaaaa-qaaaq-cai"); 
     private stable var jobCounter: Nat = 0;
-    private var jobs = HashMap.HashMap<Text, Job>(0, Text.equal, Text.hash);
-    private var users = HashMap.HashMap<Principal, User>(0, Principal.equal, Principal.hash);
-    private var proposals = HashMap.HashMap<Text, Proposal>(0, Text.equal, Text.hash);
-    private var ratings = HashMap.HashMap<Text, Rating>(0, Text.equal, Text.hash);
-    private var disputes = HashMap.HashMap<Text, Dispute>(0, Text.equal, Text.hash);
-    private var milestones = HashMap.HashMap<Text, Milestone>(0, Text.equal, Text.hash);
+    private var jobs = HashMap.HashMap<Text, Types.Job>(0, Text.equal, Text.hash);
+    private var users = HashMap.HashMap<Principal, Types.User>(0, Principal.equal, Principal.hash);
+    private var proposals = HashMap.HashMap<Text, Types.Proposal>(0, Text.equal, Text.hash);
+    private var ratings = HashMap.HashMap<Text, Types.Rating>(0, Text.equal, Text.hash);
+    private var disputes = HashMap.HashMap<Text, Types.Dispute>(0, Text.equal, Text.hash);
+    private var milestones = HashMap.HashMap<Text, Types.Milestone>(0, Text.equal, Text.hash);
     private stable var disputeCounter: Nat = 0;
-    private var escrowAccounts = HashMap.HashMap<Text, EscrowAccount>(0, Text.equal, Text.hash);
+    private var escrowAccounts = HashMap.HashMap<Text, Types.EscrowAccount>(0, Text.equal, Text.hash);
     private stable var escrowCounter: Nat = 0;
-    private var milestoneEscrows = HashMap.HashMap<Text, MilestoneEscrow>(0, Text.equal, Text.hash);
+    private var milestoneEscrows = HashMap.HashMap<Text, Types.MilestoneEscrow>(0, Text.equal, Text.hash);
     private stable var milestoneEscrowCounter: Nat = 0;
-    private var reputationNFTs = HashMap.HashMap<Text, ReputationNFT>(0, Text.equal, Text.hash);
-    private var stakingPools = HashMap.HashMap<Text, StakingPool>(0, Text.equal, Text.hash);
-    private var sponsoredJobs = HashMap.HashMap<Text, SponsoredJob>(0, Text.equal, Text.hash);
-    private var disputeVotes = HashMap.HashMap<Text, [DisputeVote]>(0, Text.equal, Text.hash);
+    private var reputationNFTs = HashMap.HashMap<Text, Types.ReputationNFT>(0, Text.equal, Text.hash);
+    private var stakingPools = HashMap.HashMap<Text, Types.StakingPool>(0, Text.equal, Text.hash);
+    private var sponsoredJobs = HashMap.HashMap<Text, Types.SponsoredJob>(0, Text.equal, Text.hash);
+    private var disputeVotes = HashMap.HashMap<Text, [Types.DisputeVote]>(0, Text.equal, Text.hash);
 
     // Job Management
-    public shared(msg) func createJob(job: Job) : async Result.Result<Text, Text> {
+    public shared(msg) func createJob(job: Types.Job) : async Result.Result<Text, Text> {
         let caller = msg.caller;
         
         // Validate caller is registered
@@ -192,17 +64,17 @@ actor Freelance {
         #ok(jobId)
     };
 
-    public query func getJob(id: Text) : async ?Job {
+    public query func getJob(id: Text) : async ?Types.Job {
         jobs.get(id)
     };
 
-    public query func listJobs() : async [Job] {
+    public query func listJobs() : async [Types.Job] {
         Iter.toArray(jobs.vals())
     };
 
 
     // User Management
-    public shared(msg) func createUser(user: User) : async Result.Result<Principal, Text> {
+    public shared(msg) func createUser(user: Types.User) : async Result.Result<Principal, Text> {
         let caller = msg.caller;
         
         switch (users.get(caller)) {
@@ -225,12 +97,12 @@ actor Freelance {
         }
     };
 
-    public query func getUser(id: Principal) : async ?User {
+    public query func getUser(id: Principal) : async ?Types.User {
         users.get(id)
     };
 
     // Proposal Management
-    public shared(msg) func submitProposal(jobId: Text, proposal: Proposal) : async Result.Result<Text, Text> {
+    public shared(msg) func submitProposal(jobId: Text, proposal: Types.Proposal) : async Result.Result<Text, Text> {
         let caller = msg.caller;
 
         switch (jobs.get(jobId)) {
@@ -295,7 +167,7 @@ actor Freelance {
     };
 
     // Rating System
-    public shared(msg) func submitRating(rating: Rating) : async Result.Result<Text, Text> {
+    public shared(msg) func submitRating(rating: Types.Rating) : async Result.Result<Text, Text> {
         let caller = msg.caller;
         
         // Verify the job exists and is completed
@@ -334,7 +206,7 @@ actor Freelance {
     };
 
     // Dispute System
-    public shared(msg) func createDispute(dispute: Dispute) : async Result.Result<Text, Text> {
+    public shared(msg) func createDispute(dispute: Types.Dispute) : async Result.Result<Text, Text> {
         let caller = msg.caller;
         
         switch (jobs.get(dispute.jobId)) {
@@ -390,7 +262,7 @@ actor Freelance {
     };
 
     // Milestone Management
-    public shared(msg) func addMilestone(milestone: Milestone) : async Result.Result<Text, Text> {
+    public shared(msg) func addMilestone(milestone: Types.Milestone) : async Result.Result<Text, Text> {
         let caller = msg.caller;
         
         switch (jobs.get(milestone.jobId)) {
@@ -444,7 +316,7 @@ actor Freelance {
     };
 
     // Escrow System
-    public shared(msg) func createEscrow(jobId: Text, amount: Nat, token: PaymentToken) : async Result.Result<Text, Text> {
+    public shared(msg) func createEscrow(jobId: Text, amount: Nat, token: Types.PaymentToken) : async Result.Result<Text, Text> {
         let caller = msg.caller;
         
         switch (jobs.get(jobId)) {
@@ -605,7 +477,7 @@ actor Freelance {
         jobId: Text,
         milestoneId: Text,
         amount: Nat,
-        token: PaymentToken
+        token: Types.PaymentToken
     ) : async Result.Result<Text, Text> {
         let caller = msg.caller;
         
@@ -785,6 +657,21 @@ actor Freelance {
         }
     };
 
+    private func resolveDisputeByVotes(disputeId: Text) : async () {
+        switch (disputes.get(disputeId)) {
+            case null {};
+            case (?dispute) {
+                // Update dispute status
+                let updatedDispute = { 
+                    dispute with 
+                    status = #resolved 
+                };
+                disputes.put(disputeId, updatedDispute);
+            };
+        };
+    };
+
+
     // Dispute Resolution
     public shared(msg) func voteOnDispute(disputeId: Text, inFavorOfClient: Bool) : async Result.Result<(), Text> {
         let caller = msg.caller;
@@ -808,7 +695,7 @@ actor Freelance {
                 switch (disputeVotes.get(disputeId)) {
                     case null disputeVotes.put(disputeId, [vote]);
                     case (?votes) {
-                        let newVotes = Array.append<DisputeVote>(votes, [vote]);
+                        let newVotes = Array.append<Types.DisputeVote>(votes, [vote]);
                         disputeVotes.put(disputeId, newVotes);
                         
                         // Check if voting threshold is reached
@@ -823,15 +710,15 @@ actor Freelance {
     };
 
     // Helper functions
-     private func getAllUserRatings(userId: Principal) : [Rating] {
+     private func getAllUserRatings(userId: Principal) : [Types.Rating] {
         let allRatings = Iter.toArray(ratings.entries());
-        Array.filter<Rating>(
-            Array.map<(Text, Rating), Rating>(allRatings, func((_, rating)) = rating),
-            func (r: Rating) : Bool { r.toId == userId }
+        Array.filter<Types.Rating>(
+            Array.map<(Text, Types.Rating), Types.Rating>(allRatings, func((_, rating)) = rating),
+            func (r: Types.Rating) : Bool { r.toId == userId }
         )
     };
 
-    private func calculateAverageRating(ratings: [Rating]) : Float {
+    private func calculateAverageRating(ratings: [Types.Rating]) : Float {
         if (ratings.size() == 0) return 0.0;
         
         var total: Float = 0.0;
@@ -843,7 +730,7 @@ actor Freelance {
     };
 
     // Helper function for token transfers
-    private func transferTokens(transfer: TokenTransfer) : async Result.Result<(), Text> {
+    private func transferTokens(transfer: Types.TokenTransfer) : async Result.Result<(), Text> {
     switch (transfer.token) {
         case (#ICP) {
             #err("ICP transfers not implemented")
